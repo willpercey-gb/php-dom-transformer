@@ -28,17 +28,17 @@ class DOMTransformer
 
     public static function fromXML(string|SimpleXMLElement $xml): DOMTransformer
     {
-        return new self($xml);
+        return new static($xml);
     }
 
     public static function fromRawHTML(string $html): DOMTransformer
     {
-        return new self(null, $html);
+        return new static(null, $html);
     }
 
     public static function fromDOM(string|DOMDocument|DOMElement $dom): DOMTransformer
     {
-        return new self(null, $dom);
+        return new static(null, $dom);
     }
 
     public function getXML(): ?SimpleXMLElement
@@ -56,5 +56,10 @@ class DOMTransformer
             $this->dom = dom_import_simplexml($this->xml ?? null);
         }
         return $this->dom;
+    }
+
+    public function toArray(): array
+    {
+        return $this->getXML()->jsonSerialize();
     }
 }
