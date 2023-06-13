@@ -1,0 +1,26 @@
+{
+  "name": "uwebpro/dom-transformer",
+  "description": "Supporting package for transforming HTML DOM and XML documents",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "willpercey",
+      "email": "info@uwebpro.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "UWebPro\\DOMTransformer\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "ext-dom": "*",
+    "ext-simplexml": "*"
+  }
+  ,
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  }
+}
+
