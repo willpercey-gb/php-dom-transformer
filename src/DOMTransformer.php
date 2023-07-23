@@ -16,12 +16,18 @@ class DOMTransformer
         SimpleXMLElement|string|null $xml = null,
         DOMDocument|DOMElement|string|null $dom = null
     ) {
-        if ($xml !== null) {
+        if ($xml) {
             $this->xml = $xml instanceof SimpleXMLElement ? $xml : simplexml_load_string($xml);
         }
 
-        if ($dom !== null) {
-            $this->dom = is_string($dom) ? (new DOMDocument())->loadHTML($dom) : $dom;
+        if ($dom) {
+            if (is_string($dom)) {
+                $text = $dom;
+                $dom = new DOMDocument();
+                $dom->loadHtml($text);
+            }
+
+            $this->dom = $dom;
         }
     }
 
@@ -50,7 +56,7 @@ class DOMTransformer
         return $this->xml;
     }
 
-    public function getDOM(): ?DOMElement
+    public function getDOM(): DOMDocument|DOMElement|null
     {
         if ($this->dom === null) {
             $this->dom = dom_import_simplexml($this->xml ?? null);
